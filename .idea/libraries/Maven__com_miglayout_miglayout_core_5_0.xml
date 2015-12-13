@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: com.miglayout:miglayout-core:5.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/miglayout/miglayout-core/5.0/miglayout-core-5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/miglayout/miglayout-core/5.0/miglayout-core-5.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/miglayout/miglayout-core/5.0/miglayout-core-5.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/lire-nightly/lib/jopensurf-src.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/lire-nightly/lib/opencv-2411.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,45 @@
+/* Application wide styles */
+
+.label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #04510a;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 0, 0, 0, 1);
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+.button:hover {
+    -fx-base: #395bae;
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(#ade8b0, #eafff2);
+    -fx-text-fill: #04510a;
+}
+
+.progress-bar {
+    -fx-border-radius: 80% !important;
+    -fx-background-radius: 20% !important;
+    -fx-progress-color: #117400 !important;
+    -fx-background-color:  #117400 !important;
+    -fx-border-color: #04510a !important;
+}
+
+/* Component specific styles */
+
+.main-panel {
+    -fx-background-image: url("../images/background.jpg");
+}
+
+.importantMessage {
+    -fx-text-fill: #AA0000 !important;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 0, 0, 0, 1) !important;
+}
+
+
