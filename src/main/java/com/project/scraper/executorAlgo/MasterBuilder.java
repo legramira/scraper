@@ -54,7 +54,7 @@ public class MasterBuilder implements BuildInterface {
     ArticleSearchFrom iconicArticleToCompare = null;
     List<ArticleSearchAgainst> asosArticleToCompare = null;
 
-    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38)) {
+    try (final WebClient webClient = new WebClient(BrowserVersion.EDGE)) {
 //      configuration of the browser
       LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
       java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
@@ -72,7 +72,9 @@ public class MasterBuilder implements BuildInterface {
 
       iconicArticleToCompare = processIconicSide(webClient);
       try {
-        asosArticleToCompare = processAsosSide(webClient, iconicArticleToCompare.getName());
+        if (iconicArticleToCompare != null) {
+          asosArticleToCompare = processAsosSide(webClient, iconicArticleToCompare.getName());
+        }
       } catch (SingleAnswerException e) {
         e.setSingleArticleFrom(iconicArticleToCompare);
         throw e;
@@ -85,7 +87,10 @@ public class MasterBuilder implements BuildInterface {
     }
 
 
-    Map<ArticleSearchAgainst, Double> mapValuesSimilitudes = asosArticleToCompare.stream().collect(Collectors.toMap((x -> x), (x -> 0.0)));
+    Map<ArticleSearchAgainst, Double> mapValuesSimilitudes = null;
+    if (asosArticleToCompare != null) {
+      mapValuesSimilitudes = asosArticleToCompare.stream().collect(Collectors.toMap((x -> x), (x -> 0.0)));
+    }
 
     Set<Class<? extends Extractor>> extractorsImages = new HashSet<>();
     extractorsImages.add(CEDD.class);
@@ -97,7 +102,10 @@ public class MasterBuilder implements BuildInterface {
     indexImages.indexImages(ParsersUtils.INDEX_FOLDER, ParsersUtils.IMAGES_TO_INDEX_FOLDER, extractorsImages);
 
 //  image similarity confi
-    ImageSearcher searcher = new GenericFastImageSearcher(asosArticleToCompare.size(), CEDD.class);
+    ImageSearcher searcher = null;
+    if (asosArticleToCompare != null) {
+      searcher = new GenericFastImageSearcher(asosArticleToCompare.size(), CEDD.class);
+    }
     SimilarityInterface imageSimilarity = new ImageSimilarity(ParsersUtils.INDEX_FOLDER, searcher);
 // string similarity
     StringSimilarity textSimilariry = new StringSimilarity();

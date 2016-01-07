@@ -43,7 +43,7 @@ public class IconicParser implements ParserHtmlPageInterface<ArticleSearchFrom> 
    * method to parse and return the element from iconic base used to search
    *
    * @param directoryToStore: path to store the images from iconic
-   * @return
+   * @return : Article that will be the search perform from
    */
   @Override
   public ArticleSearchFrom parseHtml(String directoryToStore) {
@@ -98,7 +98,9 @@ public class IconicParser implements ParserHtmlPageInterface<ArticleSearchFrom> 
       e.printStackTrace();
     }
 
-    System.out.println("name iconic parsed: " + bigDecimalPrice.toString());
+    if (bigDecimalPrice != null) {
+      System.out.println("name iconic parsed: " + bigDecimalPrice.toString());
+    }
   }
 
   private void parseImageArticle(String directoryToStore) {
@@ -107,10 +109,10 @@ public class IconicParser implements ParserHtmlPageInterface<ArticleSearchFrom> 
     ParsersUtils.createDirectory( directoryToStore);
 
     Set<String> pathImages = new CopyOnWriteArraySet<>();
-    htmlPage.getElementsByTagName("div")
+    htmlPage.getElementById("main-image").getElementsByTagName("a")
             .stream()
-            .filter((x) -> x.getAttribute("class").toLowerCase().contains("owl-item"))
-            .map((x) -> "http:" + (((HtmlAnchor) x.getFirstElementChild()).getHrefAttribute()))
+            .filter((x) -> x.getAttribute("class").toLowerCase().contains("image-wrapper"))
+            .map((x) -> "http:" + (((HtmlAnchor) x).getHrefAttribute()))
             .collect(Collectors.toList())
             .forEach((x) -> {
               try {
@@ -123,7 +125,7 @@ public class IconicParser implements ParserHtmlPageInterface<ArticleSearchFrom> 
               }
             });
     articleSearchFrom.setVisualDescriptor(pathImages);
-    System.out.println("name iconic parsed:\n " );
+    System.out.println("images iconic parsed:\n " );
     pathImages.forEach(System.out::println);
   }
 
